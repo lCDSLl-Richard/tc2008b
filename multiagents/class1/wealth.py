@@ -4,6 +4,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from pprint import pprint
+
 
 class WealthAgent(ap.Agent):
     def setup(self):
@@ -43,9 +45,9 @@ def main():
     model = WealthModel(parameters)
     results = model.run()
 
-    print(results)
-    print(results.info)
-    print(results.variables.WealthModel.head())
+    pprint(results)
+    pprint(results.info)
+    pprint(results.variables.WealthModel.head())
 
     _, ((ax1, ax2, ax3)) = plt.subplots(1, 3, figsize=(12, 6))
 
