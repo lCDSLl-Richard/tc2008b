@@ -18,9 +18,9 @@ ZFAR = 500.0
 
 # Variables para definir la posicion del observador
 # gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z)
-EYE_X = 10.0
-EYE_Y = 10.0
-EYE_Z = 10.0
+EYE_X = 50.0
+EYE_Y = 50.0
+EYE_Z = 50.0
 CENTER_X = 0
 CENTER_Y = 0
 CENTER_Z = 0
@@ -49,6 +49,29 @@ def Init():
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
 
+def Axis():
+    glShadeModel(GL_FLAT)
+    glBegin(GL_LINES)
+
+    # X axis in red
+    glColor3f(1.0, 0.0, 0.0)
+    glVertex3f(-500, 0.0, 0.0)
+    glVertex3f(500, 0.0, 0.0)
+
+    # Y axis in green
+    glColor3f(0.0, 1.0, 0.0)
+    glVertex3f(0.0, 500, 0.0)
+    glVertex3f(0.0, -500, 0.0)
+
+    # Z axis in blue
+    glColor3f(0.0, 0.0, 1.0)
+    glVertex3f(0.0, 0.0, 500)
+    glVertex3f(0.0, 0.0, -500)
+
+    glEnd()
+    glLineWidth(0.1)
+
+
 Init()
 done = False
 while not done:
@@ -72,10 +95,16 @@ while not done:
                         op.translate(0.5, 0, 0)
                     case pygame.K_a:
                         op.translate(-0.5, 0, 0)
+                    case pygame.K_x:
+                        op.scale(2, 2, 2)
+                    case pygame.K_z:
+                        op.scale(0.5, 0.5, 0.5)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
+    glColor3f(1, 1, 1)
     pyramid.render()
+    Axis()
 
     pygame.display.flip()
     pygame.time.wait(100)
