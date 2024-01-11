@@ -30,6 +30,8 @@ UP_Z = 0
 
 op = MatrixOp()
 pyramid = Pyramid(op)
+op.rotate(35, 1, 1, 1)
+op.scale(4, 4, 4)
 
 
 def Init():

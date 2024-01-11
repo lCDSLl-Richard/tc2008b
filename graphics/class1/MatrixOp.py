@@ -43,6 +43,46 @@ class MatrixOp:
         self.R[1][1] = math.cos(rad)
         self.A = self.R @ self.A
 
+    def rotate(self, angle: float, x: float, y: float, z: float):
+        if y == 0 and z == 0:
+            self.rotateX(angle)
+            return
+
+        v = np.linalg.norm([x, y, z])
+        a = x / v
+        b = y / v
+        c = z / v
+
+        d = math.sqrt(c**2 + b**2)
+
+        rx = np.identity(4)
+        rx[1][1] = c / d
+        rx[1][2] = -b / d
+        rx[2][1] = b / d
+        rx[2][2] = c / d
+
+        self.A = rx @ self.A
+
+        ry = np.identity(4)
+        ry[0][0] = d
+        ry[0][2] = a
+        ry[2][0] = -a
+        ry[2][2] = d
+
+        self.A = ry @ self.A
+
+        self.rotateZ(angle)
+
+        rx[1][2] = b / d
+        rx[2][1] = -b / d
+
+        self.A = rx @ self.A
+
+        ry[0][2] = -a
+        ry[2][0] = a
+
+        self.A = ry @ self.A
+
     def scale(self, sx: float, sy: float, sz: float):
         self.S = np.diag([sx, sy, sz, 1])
         self.A = self.S @ self.A
