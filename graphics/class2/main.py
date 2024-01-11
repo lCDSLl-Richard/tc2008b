@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-# Cargamos las bibliotecas de OpenGL
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -100,13 +99,11 @@ while not done:
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
     glShadeModel(GL_FLAT)
 
-    # Axis()
+    # Axis
     sun.draw()
-    # sun.update()
 
     for astro in astros:
         astro.draw()
-        # astro.update()
 
     pygame.display.flip()
     pygame.time.wait(20)
