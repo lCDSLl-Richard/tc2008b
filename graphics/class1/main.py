@@ -69,17 +69,18 @@ def Axis():
     glLineWidth(0.1)
 
 
-def main():
+def main(ex):
     op = MatrixOp()
     pyramid = Pyramid(op)
 
-    op.rotate(15, -0.5, 0.5, 0)
-    op.translate(3.0, -5.0, 1.0)
-    op.scale(1.5, 1.0, 1.5)
-
-    # op.scale(1.5, 1.0, 1.5)
-    # op.rotate(15, 0.5, 0.5, 0)
-    # op.translate(3.0, -5.0, 1.0)
+    if ex == "1":
+        op.rotate(15, 0.5, 0.5, 0)
+        op.translate(3.0, -5.0, 1.0)
+        op.scale(1.5, 1.0, 1.5)
+    elif ex == "2":
+        op.scale(1.5, 1.0, 1.5)
+        op.rotate(15, 0.5, 0.5, 0)
+        op.translate(3.0, -5.0, 1.0)
 
     Init()
     done = False
@@ -122,4 +123,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        ex = sys.argv[1]
+    except:
+        ex = ""
+    main(ex)
