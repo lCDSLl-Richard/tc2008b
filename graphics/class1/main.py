@@ -18,20 +18,15 @@ ZFAR = 500.0
 
 # Variables para definir la posicion del observador
 # gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z)
-EYE_X = 50.0
-EYE_Y = 50.0
-EYE_Z = 50.0
+EYE_X = 20.0
+EYE_Y = 20.0
+EYE_Z = 20.0
 CENTER_X = 0
 CENTER_Y = 0
 CENTER_Z = 0
 UP_X = 0
 UP_Y = 1
 UP_Z = 0
-
-op = MatrixOp()
-pyramid = Pyramid(op)
-op.rotate(35, 1, 1, 1)
-op.scale(4, 4, 4)
 
 
 def Init():
@@ -74,41 +69,57 @@ def Axis():
     glLineWidth(0.1)
 
 
-Init()
-done = False
-while not done:
-    for event in pygame.event.get():
-        match event.type:
-            case pygame.QUIT:
-                done = True
-            case pygame.KEYDOWN:
-                match event.key:
-                    case pygame.K_ESCAPE:
-                        done = True
-                    case pygame.K_q:
-                        op.rotateX(20)
-                    case pygame.K_e:
-                        op.rotateX(-20)
-                    case pygame.K_w:
-                        op.translate(0, 0.5, 0)
-                    case pygame.K_s:
-                        op.translate(0, -0.5, 0)
-                    case pygame.K_d:
-                        op.translate(0.5, 0, 0)
-                    case pygame.K_a:
-                        op.translate(-0.5, 0, 0)
-                    case pygame.K_x:
-                        op.scale(2, 2, 2)
-                    case pygame.K_z:
-                        op.scale(0.5, 0.5, 0.5)
+def main():
+    op = MatrixOp()
+    pyramid = Pyramid(op)
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    op.rotate(15, -0.5, 0.5, 0)
+    op.translate(3.0, -5.0, 1.0)
+    op.scale(1.5, 1.0, 1.5)
 
-    glColor3f(1, 1, 1)
-    pyramid.render()
-    Axis()
+    # op.scale(1.5, 1.0, 1.5)
+    # op.rotate(15, 0.5, 0.5, 0)
+    # op.translate(3.0, -5.0, 1.0)
 
-    pygame.display.flip()
-    pygame.time.wait(100)
+    Init()
+    done = False
+    while not done:
+        for event in pygame.event.get():
+            match event.type:
+                case pygame.QUIT:
+                    done = True
+                case pygame.KEYDOWN:
+                    match event.key:
+                        case pygame.K_ESCAPE:
+                            done = True
+                        case pygame.K_q:
+                            op.rotateX(20)
+                        case pygame.K_e:
+                            op.rotateX(-20)
+                        case pygame.K_w:
+                            op.translate(0, 0.5, 0)
+                        case pygame.K_s:
+                            op.translate(0, -0.5, 0)
+                        case pygame.K_d:
+                            op.translate(0.5, 0, 0)
+                        case pygame.K_a:
+                            op.translate(-0.5, 0, 0)
+                        case pygame.K_x:
+                            op.scale(2, 2, 2)
+                        case pygame.K_z:
+                            op.scale(0.5, 0.5, 0.5)
 
-pygame.quit()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        Axis()
+        glColor3f(1, 1, 1)
+        pyramid.render()
+
+        pygame.display.flip()
+        pygame.time.wait(100)
+
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()

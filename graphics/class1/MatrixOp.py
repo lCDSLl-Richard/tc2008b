@@ -48,12 +48,11 @@ class MatrixOp:
             self.rotateX(angle)
             return
 
-        v = np.linalg.norm([x, y, z])
+        v = math.sqrt(x**2 + y**2 + z**2)
         a = x / v
         b = y / v
         c = z / v
-
-        d = math.sqrt(c**2 + b**2)
+        d = math.sqrt(b**2 + c**2)
 
         rx = np.identity(4)
         rx[1][1] = c / d
@@ -61,27 +60,27 @@ class MatrixOp:
         rx[2][1] = b / d
         rx[2][2] = c / d
 
-        self.A = rx @ self.A
-
         ry = np.identity(4)
         ry[0][0] = d
-        ry[0][2] = a
-        ry[2][0] = -a
-        ry[2][2] = d
-
-        self.A = ry @ self.A
-
-        self.rotateZ(angle)
-
-        rx[1][2] = b / d
-        rx[2][1] = -b / d
-
-        self.A = rx @ self.A
-
         ry[0][2] = -a
         ry[2][0] = a
+        ry[2][2] = d
 
+        # Apply rotations in the order of X, Y, and Z
+        self.A = rx @ self.A
         self.A = ry @ self.A
+        self.rotateZ(angle)
+
+        # rx[1][2] = b / d
+        # rx[2][1] = -b / d
+
+        # ry[0][2] = -a
+        # ry[2][0] = a
+
+        print(rx)
+
+        self.A = np.linalg.inv(ry) @ self.A
+        self.A = np.linalg.inv(rx) @ self.A
 
     def scale(self, sx: float, sy: float, sz: float):
         self.S = np.diag([sx, sy, sz, 1])
