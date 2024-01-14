@@ -9,8 +9,6 @@ from Astro import Astro
 
 astros: list[Astro] = []
 
-pygame.init()
-
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
 
@@ -18,9 +16,9 @@ FOVY = 60.0
 ZNEAR = 0.01
 ZFAR = 500.0
 
-EYE_X = 10.0
-EYE_Y = 10.0
-EYE_Z = 10.0
+EYE_X = 15.0
+EYE_Y = 15.0
+EYE_Z = 15.0
 CENTER_X = 0
 CENTER_Y = 0
 CENTER_Z = 0
@@ -61,8 +59,9 @@ def Axis():
 
 
 def Init():
+    pygame.init()
     pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), DOUBLEBUF | OPENGL)
-    pygame.display.set_caption("OpenGL: ejes 3D")
+    pygame.display.set_caption("OpenGL: 3D Astros")
 
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -74,38 +73,45 @@ def Init():
     glClearColor(0, 0, 0, 0)
     glEnable(GL_DEPTH_TEST)
 
-    astros.append(Astro(4.0, 0.5, [0.0, 0.0, 1.0], 1.0))
-    astros.append(Astro(5.5, 0.7, [0.0, 1.0, 1.0], 0.4))
-    astros.append(Astro(7.0, 0.6, [0.3, 0.6, 0.5], 2.6))
-    astros.append(Astro(13, 1.2, [1, 0.4, 0], 0.8))
+    astros.append(Astro(5, 0.6, [1, 1, 1], 1))
+    astros.append(Astro(8, 0.8, [0, 1, 0], 1.5))
+    astros.append(Astro(15, 1.8, [0.9, 0.1, 0.7], 2))
 
-    astros[0].addMoon(Astro(1.5, 0.1, [1.0, 1.0, 1.0], 1.0))
-    astros[1].addMoon(Astro(1.5, 0.1, [1.0, 1.0, 1.0], 1.7))
-    astros[3].addMoon(Astro(2, 0.4, [1, 1, 1], 0.5))
+    astros[1].addMoon(Astro(1.6, 0.4, [0.3, 0.7, 0.8], 0.3))
+    astros[1].addMoon(Astro(1.7, 0.7, [0.1, 0.8, 0.5], 1.1))
+    astros[2].addMoon(Astro(2, 0.2, [0.3, 0.3, 0.3], 0.75))
+    astros[2].addMoon(Astro(3, 0.6, [0.5, 0.7, 0.3], 3))
+    astros[2].addMoon(Astro(4, 0.3, [0.3, 1, 0.3], 0.5))
+    astros[2].addMoon(Astro(5, 0.4, [0.3, 0.7, 1], 0.15))
 
 
-sun = Astro(0, 2, [1, 0, 0], 1)
+def main():
+    sun = Astro(0, 2, [1, 0, 0], 1)
 
-Init()
-done = False
-while not done:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            done = True
+    Init()
+    done = False
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                done = True
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
-    glShadeModel(GL_FLAT)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
+        glShadeModel(GL_FLAT)
 
-    # Axis
-    sun.draw()
+        # Axis()
+        sun.draw()
 
-    for astro in astros:
-        astro.draw()
+        for astro in astros:
+            astro.draw()
 
-    pygame.display.flip()
-    pygame.time.wait(20)
+        pygame.display.flip()
+        pygame.time.wait(20)
 
-pygame.quit()
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
