@@ -38,7 +38,7 @@ PLAIN_MAX_Z = 20
 def Init():
     pygame.init()
     pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), DOUBLEBUF | OPENGL)
-    pygame.display.set_caption("OpenGL: 3D Pyramid")
+    pygame.display.set_caption("OpenGL: 3D Cubes")
 
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
