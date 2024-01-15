@@ -77,6 +77,7 @@ def Axis():
 
 
 def Plain():
+    glPushMatrix()
     glBegin(GL_QUADS)
     glColor3f(128 / 255, 128 / 255, 128 / 255)
     glVertex3f(PLAIN_MIN_X, 0, PLAIN_MIN_Z)
@@ -84,6 +85,7 @@ def Plain():
     glVertex3f(PLAIN_MAX_X, 0, PLAIN_MAX_Z)
     glVertex3f(PLAIN_MAX_X, 0, PLAIN_MIN_Z)
     glEnd()
+    glPopMatrix()
 
 
 cubes = [
