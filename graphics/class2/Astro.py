@@ -18,21 +18,18 @@ class Astro:
     def update(self):
         self.deg += self.v_ang
         if self.deg >= 360.0:
-            self.deg = 0
+            self.deg = 0.0
 
     def draw(self):
         glPushMatrix()
-        glColor3fv(self.color)
         glRotatef(self.deg, 0.0, 1.0, 0.0)
         glTranslatef(self.dist, 0.0, 0.0)
         glScalef(self.esc, self.esc, self.esc)
-        glRotatef(-90, 1, 0, 0.0)
-        gluSphere(self.sphere, 1.0, 16, 16)
-        glRotatef(90, 1, 0, 0)
-
         for moon in self.moons:
             moon.draw()
-
+        glRotatef(-90, 1, 0, 0.0)
+        glColor3fv(self.color)
+        gluSphere(self.sphere, 1.0, 16, 16)
         glPopMatrix()
         self.update()
 

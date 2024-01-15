@@ -7,8 +7,6 @@ from OpenGL.GLUT import *
 
 from Astro import Astro
 
-astros: list[Astro] = []
-
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
 
@@ -58,6 +56,9 @@ def Axis():
     glLineWidth(1.0)
 
 
+astros: list[Astro] = []
+
+
 def Init():
     pygame.init()
     pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), DOUBLEBUF | OPENGL)
@@ -77,8 +78,8 @@ def Init():
     astros.append(Astro(8, 0.8, [0, 1, 0], 1.5))
     astros.append(Astro(15, 1.8, [0.9, 0.1, 0.7], 2))
 
-    astros[1].addMoon(Astro(1.6, 0.4, [0.3, 0.7, 0.8], 0.3))
-    astros[1].addMoon(Astro(1.7, 0.7, [0.1, 0.8, 0.5], 1.1))
+    astros[1].addMoon(Astro(1.6, 0.4, [0.3, 0.5, 0.8], 0.3))
+    astros[1].addMoon(Astro(1.7, 0.7, [0.6, 0.3, 0.5], 1.1))
     astros[2].addMoon(Astro(2, 0.2, [0.3, 0.3, 0.3], 0.75))
     astros[2].addMoon(Astro(3, 0.6, [0.5, 0.7, 0.3], 3))
     astros[2].addMoon(Astro(4, 0.3, [0.3, 1, 0.3], 0.5))
