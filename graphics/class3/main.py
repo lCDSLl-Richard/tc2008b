@@ -73,7 +73,7 @@ def Axis():
     glVertex3f(0.0, 0.0, -500)
 
     glEnd()
-    glLineWidth(0.1)
+    glLineWidth(3.0)
 
 
 def Plain():
@@ -104,23 +104,29 @@ cubes = [
     Cube([0.0, 0, 0], [random(), 0, random()]),
 ]
 
-Init()
-done = False
-while not done:
-    for event in pygame.event.get():
-        match event.type:
-            case pygame.QUIT:
-                done = True
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+def main():
+    Init()
+    done = False
+    while not done:
+        for event in pygame.event.get():
+            match event.type:
+                case pygame.QUIT:
+                    done = True
 
-    glColor3f(1, 1, 1)
-    Axis()
-    Plain()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-    for cube in cubes:
-        cube.render()
-        cube.update()
+        glColor3f(1, 1, 1)
+        Axis()
+        Plain()
 
-    pygame.display.flip()
-    pygame.time.wait(50)
+        for cube in cubes:
+            cube.render()
+            cube.update()
+
+        pygame.display.flip()
+        pygame.time.wait(50)
+
+
+if __name__ == "__main__":
+    main()
