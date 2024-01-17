@@ -10,7 +10,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 # Se carga el archivo de la clase Cubo
-from Cubo import Cubo
+from Cubo import Cube
 
 screen_width = 500
 screen_height = 500
@@ -86,7 +86,7 @@ def Init():
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
 
     for _ in range(ncubos):
-        cubos.append(Cubo(DimBoard, 1.0))
+        cubos.append(Cube(DimBoard, 1.0))
 
 
 def display():
