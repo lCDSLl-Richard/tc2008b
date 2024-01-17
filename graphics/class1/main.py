@@ -66,7 +66,7 @@ def Axis():
     glVertex3f(0.0, 0.0, -500)
 
     glEnd()
-    glLineWidth(0.1)
+    glLineWidth(3)
 
 
 def main(ex):
