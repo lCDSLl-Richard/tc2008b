@@ -42,7 +42,7 @@ DimBoard = 200
 pygame.init()
 
 # cubo = Cubo(DimBoard, 1.0)
-cubos = []
+cubos: list[Cube] = []
 ncubos = 50
 
 
